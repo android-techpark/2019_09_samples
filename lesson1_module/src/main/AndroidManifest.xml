@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="superp.techpark.ru.mymodule" >
+
+    <application>
+
+        <activity android:name=".ThirdActivity"/>
+
+    </application>
+
+</manifest>
