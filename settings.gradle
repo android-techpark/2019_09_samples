@@ -1,1 +1,1 @@
-include ':lesson1', ':lesson1_module', ':lesson2'
+include ':lesson1', ':lesson1_module', ':lesson2', ':lesson3'

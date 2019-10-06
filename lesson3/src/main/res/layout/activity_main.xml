@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".BaseActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/second"
+        android:text="@string/go_to_second"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/set_text"
+        android:text="@string/set_dynamic_text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="40sp"
+        android:id="@+id/dynamic_text"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
