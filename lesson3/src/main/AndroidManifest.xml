@@ -24,5 +24,6 @@
         <activity android:name=".fragment_part.activity.MultiActionActivity" />
         <activity android:name=".fragment_part.activity.TransactionActivityByTag" />
         <activity android:name=".fragment_part.activity.TransactionActivityById" />
+        <activity android:name=".fragment_part.activity.StateLossActivity" />
     </application>
 </manifest>

@@ -10,6 +10,7 @@ import superp.techpark.ru.lesson3.fragment_part.activity.DynamicFragmentActivity
 import superp.techpark.ru.lesson3.fragment_part.activity.DynamicFragmentFixedActivity;
 import superp.techpark.ru.lesson3.fragment_part.activity.LayoutFragmentActivity;
 import superp.techpark.ru.lesson3.fragment_part.activity.MultiActionActivity;
+import superp.techpark.ru.lesson3.fragment_part.activity.StateLossActivity;
 import superp.techpark.ru.lesson3.fragment_part.activity.TransactionActivityById;
 import superp.techpark.ru.lesson3.fragment_part.activity.TransactionActivityByTag;
 
@@ -74,6 +75,10 @@ public class FirstActivity extends BaseActivity {
         );
         findViewById(R.id.btn_transactions_by_tag).setOnClickListener(view ->
                 startActivity(new Intent(FirstActivity.this, TransactionActivityByTag.class))
+        );
+
+        findViewById(R.id.btn_state_loss).setOnClickListener(view ->
+                startActivity(new Intent(FirstActivity.this, StateLossActivity.class))
         );
     }
 }
