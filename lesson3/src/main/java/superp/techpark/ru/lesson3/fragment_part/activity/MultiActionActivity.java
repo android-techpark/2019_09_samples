@@ -45,6 +45,7 @@ public class MultiActionActivity extends BaseActivity {
             transaction.add(R.id.top_container, new RedFragment());
         }
 
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }

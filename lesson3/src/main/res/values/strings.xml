@@ -11,8 +11,8 @@
     <string name="red_fragment">RED FRAGMENT</string>
     <string name="blue_fragment">BLUE FRAGMENT</string>
     <string name="green_fragment">GREEN FRAGMENT</string>
-    <string name="btn_transactions_by_id">Transactions by id</string>
-    <string name="btn_transactions_by_tag">Transactions by tag</string>
+    <string name="btn_transactions_by_id">By id</string>
+    <string name="btn_transactions_by_tag">By tag</string>
     <string name="add_fragment">Add Fragment</string>
     <string name="add_to_back_stack">Add to BackStack</string>
     <string name="remove_fragment">Remove Fragment</string>
@@ -24,4 +24,5 @@
     <string name="btn_cooperation">Cooperation</string>
     <string name="second_activity_title">Second Activity</string>
     <string name="rollback">Rollback until red</string>
+    <string name="transaction_label">Transaction:</string>
 </resources>

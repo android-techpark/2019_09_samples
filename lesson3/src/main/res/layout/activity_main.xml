@@ -58,5 +58,30 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_multi_action" />
 
+    <TextView
+        android:layout_marginTop="@dimen/item_offset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/transaction_label" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btn_transactions_by_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_transactions_by_id" />
+
+        <Button
+            android:id="@+id/btn_transactions_by_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_transactions_by_tag" />
+
+    </LinearLayout>
 
 </LinearLayout>

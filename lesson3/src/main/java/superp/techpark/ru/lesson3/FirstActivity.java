@@ -10,6 +10,8 @@ import superp.techpark.ru.lesson3.fragment_part.activity.DynamicFragmentActivity
 import superp.techpark.ru.lesson3.fragment_part.activity.DynamicFragmentFixedActivity;
 import superp.techpark.ru.lesson3.fragment_part.activity.LayoutFragmentActivity;
 import superp.techpark.ru.lesson3.fragment_part.activity.MultiActionActivity;
+import superp.techpark.ru.lesson3.fragment_part.activity.TransactionActivityById;
+import superp.techpark.ru.lesson3.fragment_part.activity.TransactionActivityByTag;
 
 public class FirstActivity extends BaseActivity {
 
@@ -59,13 +61,19 @@ public class FirstActivity extends BaseActivity {
         findViewById(R.id.btn_dynamic_fragment).setOnClickListener(view ->
                 startActivity(new Intent(FirstActivity.this, DynamicFragmentActivity.class))
         );
-
         findViewById(R.id.btn_dynamic_fragment_fixed).setOnClickListener(view ->
                 startActivity(new Intent(FirstActivity.this, DynamicFragmentFixedActivity.class))
         );
 
         findViewById(R.id.btn_multi_action).setOnClickListener(view ->
                 startActivity(new Intent(FirstActivity.this, MultiActionActivity.class))
+        );
+
+        findViewById(R.id.btn_transactions_by_id).setOnClickListener(view ->
+                startActivity(new Intent(FirstActivity.this, TransactionActivityById.class))
+        );
+        findViewById(R.id.btn_transactions_by_tag).setOnClickListener(view ->
+                startActivity(new Intent(FirstActivity.this, TransactionActivityByTag.class))
         );
     }
 }

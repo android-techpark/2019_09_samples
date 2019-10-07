@@ -22,5 +22,7 @@
         <activity android:name=".fragment_part.activity.DynamicFragmentActivity" />
         <activity android:name=".fragment_part.activity.DynamicFragmentFixedActivity" />
         <activity android:name=".fragment_part.activity.MultiActionActivity" />
+        <activity android:name=".fragment_part.activity.TransactionActivityByTag" />
+        <activity android:name=".fragment_part.activity.TransactionActivityById" />
     </application>
 </manifest>
