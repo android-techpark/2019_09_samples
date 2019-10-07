@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import superp.techpark.ru.lesson3.fragment_part.activity.DynamicFragmentActivity;
+import superp.techpark.ru.lesson3.fragment_part.activity.LayoutFragmentActivity;
+
 public class FirstActivity extends BaseActivity {
 
     public static final String STATE = "state";
@@ -25,6 +28,8 @@ public class FirstActivity extends BaseActivity {
         findViewById(R.id.set_text).setOnClickListener(v ->
                 mText.setText(String.valueOf(new Random().nextInt()))
         );
+
+        initFragmentRelated();
     }
 
     private void restoreState(Bundle savedInstanceState) {
@@ -43,5 +48,15 @@ public class FirstActivity extends BaseActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    private void initFragmentRelated() {
+        findViewById(R.id.btn_layout_fragment).setOnClickListener(view ->
+                startActivity(new Intent(FirstActivity.this, LayoutFragmentActivity.class))
+        );
+
+        findViewById(R.id.btn_dynamic_fragment).setOnClickListener(view ->
+                startActivity(new Intent(FirstActivity.this, DynamicFragmentActivity.class))
+        );
     }
 }

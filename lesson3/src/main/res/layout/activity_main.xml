@@ -26,4 +26,16 @@
         android:id="@+id/dynamic_text"
         android:layout_height="wrap_content"/>
 
+    <Button
+        android:id="@+id/btn_layout_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_layout_fragment" />
+
+    <Button
+        android:id="@+id/btn_dynamic_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_dynamic_fragment" />
+
 </LinearLayout>
