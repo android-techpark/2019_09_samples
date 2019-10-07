@@ -20,5 +20,6 @@
         <activity android:name=".SecondActivity"/>
         <activity android:name=".fragment_part.activity.LayoutFragmentActivity" />
         <activity android:name=".fragment_part.activity.DynamicFragmentActivity" />
+        <activity android:name=".fragment_part.activity.DynamicFragmentFixedActivity" />
     </application>
 </manifest>

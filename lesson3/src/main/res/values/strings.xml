@@ -5,8 +5,9 @@
     <string name="set_dynamic_text">set dynamic text</string>
 
     <string name="btn_second_activity">Second Activity</string>
-    <string name="btn_layout_fragment">Layout Fragment</string>
-    <string name="btn_dynamic_fragment">Dynamic Fragment</string>
+    <string name="btn_layout_fragment">Layout</string>
+    <string name="btn_dynamic_fragment">Dynamic</string>
+    <string name="btn_dynamic_fragment_fixed">Dynamic fixed</string>
     <string name="red_fragment">RED FRAGMENT</string>
     <string name="blue_fragment">BLUE FRAGMENT</string>
     <string name="green_fragment">GREEN FRAGMENT</string>

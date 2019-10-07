@@ -8,6 +8,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 import superp.techpark.ru.lesson3.fragment_part.activity.DynamicFragmentActivity;
+import superp.techpark.ru.lesson3.fragment_part.activity.DynamicFragmentFixedActivity;
 import superp.techpark.ru.lesson3.fragment_part.activity.LayoutFragmentActivity;
 
 public class FirstActivity extends BaseActivity {
@@ -57,6 +58,10 @@ public class FirstActivity extends BaseActivity {
 
         findViewById(R.id.btn_dynamic_fragment).setOnClickListener(view ->
                 startActivity(new Intent(FirstActivity.this, DynamicFragmentActivity.class))
+        );
+
+        findViewById(R.id.btn_dynamic_fragment_fixed).setOnClickListener(view ->
+                startActivity(new Intent(FirstActivity.this, DynamicFragmentFixedActivity.class))
         );
     }
 }
