@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class BatteryActivity extends AppCompatActivity {
 
     private TextView mTextView;
+    private BatteryReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,14 @@ public class BatteryActivity extends AppCompatActivity {
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        registerReceiver(new BatteryReceiver(), intentFilter);
+        mReceiver = new BatteryReceiver();
+        registerReceiver(mReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mReceiver);
+        super.onDestroy();
     }
 
     class BatteryReceiver extends BroadcastReceiver {

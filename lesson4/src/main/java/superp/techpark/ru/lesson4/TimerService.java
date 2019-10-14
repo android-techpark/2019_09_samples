@@ -4,6 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.util.Log;
+
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.concurrent.TimeUnit;
@@ -16,7 +18,14 @@ public class TimerService extends Service {
     private CountDownTimer mCountDownTimer;
 
     @Override
+    public void onCreate() {
+        Log.d("MyService", "OnCreate");
+        super.onCreate();
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d("MyService", "onstart" + String.valueOf(intent));
         String action = intent.getAction();
         if (action != null) {
             if (ACTION_START.equals(action)) {
@@ -25,7 +34,12 @@ public class TimerService extends Service {
                 stopTimer();
             }
         }
-        return START_NOT_STICKY;
+        return START_REDELIVER_INTENT;
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
     }
 
     private void stopTimer() {
@@ -40,9 +54,7 @@ public class TimerService extends Service {
             public void onTick(long millisUntilFinished) {
                 Intent intent = new Intent(TimerActivity.ACTION_TICK);
                 intent.putExtra(PROGRESS, millisUntilFinished / 1000);
-                LocalBroadcastManager
-                        .getInstance(getApplicationContext())
-                        .sendBroadcastSync(intent);
+                sendOrderedBroadcast(intent, null);
             }
 
             @Override
@@ -55,9 +67,16 @@ public class TimerService extends Service {
 
     private void sendFinishIntent() {
         Intent intent = new Intent(TimerActivity.ACTION_FINISH);
-        LocalBroadcastManager
-                .getInstance(getApplicationContext())
-                .sendBroadcastSync(intent);
+        sendBroadcast(intent);
+//        LocalBroadcastManager
+//                .getInstance(getApplicationContext())
+//                .sendBroadcastSync(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d("MyService", "onDestroy");
+        super.onDestroy();
     }
 
     private void cancel() {
