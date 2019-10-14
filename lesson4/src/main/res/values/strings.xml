@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">lesson4</string>
+    <string name="finished">\"finished\"</string>
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+    <string name="battery_stats">energy stats</string>
+</resources>
