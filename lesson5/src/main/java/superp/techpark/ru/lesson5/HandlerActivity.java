@@ -100,6 +100,7 @@ public class HandlerActivity extends AppCompatActivity {
             public void run() {
                 Log.d(TAG, "Thread started");
                 Looper.prepare();
+                handler = new Handler(handlerCallback);
                 Looper.loop();
                 Log.d(TAG, "Thread stopped");
             }
