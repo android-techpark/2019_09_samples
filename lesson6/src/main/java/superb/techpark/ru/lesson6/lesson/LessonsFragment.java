@@ -26,10 +26,7 @@ import superb.techpark.ru.lesson6.R;
 
 public class LessonsFragment extends Fragment {
 
-
-    public LessonsFragment() {
-        // Required empty public constructor
-    }
+    private LessonsViewModel mLessonsViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,8 +51,9 @@ public class LessonsFragment extends Fragment {
                 }
             }
         };
-        new ViewModelProvider(getActivity())
-                .get(LessonsViewModel.class)
+        mLessonsViewModel = new ViewModelProvider(getActivity())
+                .get(LessonsViewModel.class);
+        mLessonsViewModel
                 .getLessons()
                 .observe(getViewLifecycleOwner(), observer);
     }
@@ -79,11 +77,17 @@ public class LessonsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull LessonViewHolder holder, int position) {
-            Lesson lesson = mLessons.get(position);
+            final Lesson lesson = mLessons.get(position);
             holder.mName.setText(lesson.getName());
             holder.mPlace.setText(lesson.getPlace());
             holder.mDate.setText(mFormat.format(lesson.getDate()));
             holder.mRating.setText(String.valueOf(lesson.getRating()));
+            holder.mLikeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mLessonsViewModel.like(lesson);
+                }
+            });
         }
 
         @Override
@@ -99,6 +103,7 @@ public class LessonsFragment extends Fragment {
         protected TextView mDate;
         protected TextView mRating;
         protected ImageView mIcon;
+        protected ImageView mLikeBtn;
 
         public LessonViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +112,7 @@ public class LessonsFragment extends Fragment {
             mName = itemView.findViewById(R.id.name);
             mRating = itemView.findViewById(R.id.rating);
             mIcon = itemView.findViewById(R.id.icon);
+            mLikeBtn = itemView.findViewById(R.id.like);
         }
     }
 }

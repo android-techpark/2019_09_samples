@@ -28,9 +28,11 @@ public class LessonRepo {
     }
 
     private final Context mContext;
+    private LessonApi mLessonApi;
 
     public LessonRepo(Context context) {
         mContext = context;
+        mLessonApi = ApiRepo.from(mContext).getLessonApi();
     }
 
     public LiveData<List<Lesson>> getLessons() {
@@ -38,8 +40,7 @@ public class LessonRepo {
     }
 
     public void refresh() {
-        LessonApi api = ApiRepo.from(mContext).getLessonApi();
-        api.getAll().enqueue(new Callback<List<LessonApi.LessonPlain>>() {
+        mLessonApi.getAll().enqueue(new Callback<List<LessonApi.LessonPlain>>() {
             @Override
             public void onResponse(Call<List<LessonApi.LessonPlain>> call,
                                    Response<List<LessonApi.LessonPlain>> response) {
@@ -51,6 +52,24 @@ public class LessonRepo {
             @Override
             public void onFailure(Call<List<LessonApi.LessonPlain>> call, Throwable t) {
                 Log.e("LessonRepo", "Failed to load", t);
+            }
+        });
+    }
+
+    public void like(final Lesson lesson) {
+        mLessonApi.like(lesson.getId(), new LessonApi.Like(lesson.getRating() + 1)).enqueue(new Callback<LessonApi.Like>() {
+            @Override
+            public void onResponse(Call<LessonApi.Like> call,
+                                   Response<LessonApi.Like> response) {
+                if (response.isSuccessful()) {
+                    refresh();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LessonApi.Like> call, Throwable t) {
+                Log.d("Test", "Failed to like " + lesson.getId(), t);
+                t.printStackTrace();
             }
         });
     }
