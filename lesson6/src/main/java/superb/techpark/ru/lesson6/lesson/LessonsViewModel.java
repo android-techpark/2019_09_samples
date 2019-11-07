@@ -24,4 +24,8 @@ public class LessonsViewModel extends AndroidViewModel {
     public void like(Lesson lesson) {
         mRepo.like(lesson);
     }
+
+    public void refresh() {
+        mRepo.refresh();
+    }
 }
