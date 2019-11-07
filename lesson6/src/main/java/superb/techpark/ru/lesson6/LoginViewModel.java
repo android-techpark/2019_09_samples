@@ -10,7 +10,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import java.util.Objects;
 
@@ -19,7 +21,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     private LoginData mLastLoginData = new LoginData("", "");
 
-    private MutableLiveData<LoginState> mLoginState = new MutableLiveData<>();
+    private MediatorLiveData<LoginState> mLoginState = new MediatorLiveData<>();
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -46,16 +48,19 @@ public class LoginViewModel extends AndroidViewModel {
 
     private void requestLogin(final LoginData loginData) {
         mLoginState.postValue(LoginState.IN_PROGRESS);
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+        final LiveData<AuthRepo.AuthProgress> progressLiveData = AuthRepo.getInstance().login(loginData.getLogin(), loginData.getPassword());
+        mLoginState.addSource(progressLiveData, new Observer<AuthRepo.AuthProgress>() {
             @Override
-            public void run() {
-                if (new LoginData("test", "test").equals(loginData)) {
+            public void onChanged(AuthRepo.AuthProgress authProgress) {
+                if (authProgress == AuthRepo.AuthProgress.SUCCESS) {
                     mLoginState.postValue(LoginState.SUCCESS);
-                } else {
+                    mLoginState.removeSource(progressLiveData);
+                } else if (authProgress == AuthRepo.AuthProgress.FAILED) {
                     mLoginState.postValue(LoginState.FAILED);
+                    mLoginState.removeSource(progressLiveData);
                 }
             }
-        }, 3000);
+        });
     }
 
 
