@@ -34,5 +34,39 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mLoginViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
+
+        final Button loginBtn = view.findViewById(R.id.login_btn);
+
+        mLoginViewModel.getProgress().observe(getViewLifecycleOwner(), new Observer<LoginViewModel.LoginState>() {
+            @Override
+            public void onChanged(LoginViewModel.LoginState loginState) {
+                if (loginState == LoginViewModel.LoginState.FAILED) {
+                    loginBtn.setEnabled(true);
+                    loginBtn.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+                } else if (loginState == LoginViewModel.LoginState.ERROR) {
+                    loginBtn.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_light));
+                    loginBtn.setEnabled(true);
+                } else if (loginState == LoginViewModel.LoginState.IN_PROGRESS) {
+                    loginBtn.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
+                    loginBtn.setEnabled(false);
+                } else if (loginState == LoginViewModel.LoginState.SUCCESS) {
+                    Toast.makeText(getContext(), "Success login", Toast.LENGTH_LONG).show();
+                    loginBtn.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
+                    loginBtn.setEnabled(false);
+                } else {
+                    loginBtn.setBackground(getContext().getDrawable(android.R.drawable.btn_default));
+                    loginBtn.setEnabled(true);
+                }
+            }
+        });
+
+        final EditText login = view.findViewById(R.id.login);
+        final EditText password = view.findViewById(R.id.password);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLoginViewModel.login(login.getText().toString(), password.getText().toString());
+            }
+        });
     }
 }
