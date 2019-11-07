@@ -10,6 +10,7 @@ import superb.techpark.ru.lesson6.ApplicationModified;
 
 public class ApiRepo {
     private final UserApi mUserApi;
+    private final LessonApi mLessonApi;
     private final OkHttpClient mOkHttpClient;
 
     public ApiRepo() {
@@ -26,10 +27,15 @@ public class ApiRepo {
                 .build();
 
         mUserApi = retrofit.create(UserApi.class);
+        mLessonApi = retrofit.create(LessonApi.class);
     }
 
     public UserApi getUserApi() {
         return mUserApi;
+    }
+
+    public LessonApi getLessonApi() {
+        return mLessonApi;
     }
 
     public static ApiRepo from(Context context) {
