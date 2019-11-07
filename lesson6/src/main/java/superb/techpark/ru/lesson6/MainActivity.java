@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import superb.techpark.ru.lesson6.lesson.LessonsFragment;
+
+public class MainActivity extends AppCompatActivity implements Router {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,5 +17,12 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.fragment_container, new LoginFragment(), "Login")
                     .commit();
         }
+    }
+
+    @Override
+    public void openLessons() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new LessonsFragment(), "Lessons")
+                .commit();
     }
 }

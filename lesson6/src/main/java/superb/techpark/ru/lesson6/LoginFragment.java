@@ -51,8 +51,10 @@ public class LoginFragment extends Fragment {
                     loginBtn.setEnabled(false);
                 } else if (loginState == LoginViewModel.LoginState.SUCCESS) {
                     Toast.makeText(getContext(), "Success login", Toast.LENGTH_LONG).show();
-                    loginBtn.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
-                    loginBtn.setEnabled(false);
+                    Router router = (Router) getActivity();
+                    if (router != null) {
+                        router.openLessons();
+                    }
                 } else {
                     loginBtn.setBackground(getContext().getDrawable(android.R.drawable.btn_default));
                     loginBtn.setEnabled(true);
