@@ -14,6 +14,7 @@
     <string name="menu_animator">Animator</string>
     <string name="menu_animator_set">Animator Set</string>
     <string name="menu_interpolator">Interpolator</string>
+    <string name="menu_diy">DIY Animations</string>
 
     <string name="rotate_and_alpha">Rotate and Alpha</string>
     <string name="rotate_and_reverse">Rotate and Reverse</string>

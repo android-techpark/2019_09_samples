@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new InterpolatorFragment();
                 toolbar.setTitle(R.string.menu_interpolator);
                 break;
+            case R.id.diy:
+                fragment = new SnowFlakesFragment();
+                toolbar.setTitle(R.string.menu_diy);
+                break;
             default:
                 throw new UnsupportedOperationException();
         }
