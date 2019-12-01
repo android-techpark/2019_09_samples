@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/lesson1" />
+            <option value="$PROJECT_DIR$/lesson10" />
             <option value="$PROJECT_DIR$/lesson1_module" />
             <option value="$PROJECT_DIR$/lesson2" />
             <option value="$PROJECT_DIR$/lesson3" />
@@ -21,6 +22,7 @@
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>
