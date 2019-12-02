@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "610923123601",
+    "firebase_url": "https://tp-android-demo.firebaseio.com",
+    "project_id": "tp-android-demo",
+    "storage_bucket": "tp-android-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610923123601:android:1d5b734dce75cf5a",
+        "android_client_info": {
+          "package_name": "ru.mail.park.android.lesson10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610923123601-cgrtvaufdpkfmk6od90c0fgom8r9atm9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO2kRDqCa5iYSC2aAkeHZmQQq83UIDtT0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610923123601-cgrtvaufdpkfmk6od90c0fgom8r9atm9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610923123601:android:dd7c90256ade6f1c1e0030",
+        "android_client_info": {
+          "package_name": "superp.techpark.ru.lesson10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610923123601-cgrtvaufdpkfmk6od90c0fgom8r9atm9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO2kRDqCa5iYSC2aAkeHZmQQq83UIDtT0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610923123601-cgrtvaufdpkfmk6od90c0fgom8r9atm9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
