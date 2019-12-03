@@ -157,7 +157,8 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.example_large_icon);
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.bg_5);
-        NotificationCompat.BigPictureStyle style = new NotificationCompat.BigPictureStyle();
+        NotificationCompat.BigPictureStyle style =
+                new NotificationCompat.BigPictureStyle();
         style.bigPicture(image);
         style.bigLargeIcon(largeIcon);
 
@@ -190,8 +191,12 @@ public class MainActivity extends AppCompatActivity {
         Intent contentIntent = new Intent(this, MessageActivity.class);
         contentIntent.putExtra(MessageActivity.EXTRA_TEXT, message);
 
-        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, contentIntent, flags);
+        int flags = PendingIntent.FLAG_CANCEL_CURRENT;
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                this,
+                1,
+                contentIntent,
+                flags);
 
         builder.addAction(new NotificationCompat.Action(0, getString(R.string.show), pendingIntent));
     }
@@ -225,7 +230,8 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT < 26)
             return;
 
-        NotificationChannel defaultChannel = new NotificationChannel(CHANNEL_DEFAULT,
+        NotificationChannel defaultChannel = new NotificationChannel(
+                CHANNEL_DEFAULT,
                 getString(R.string.channel_default_name), NotificationManager.IMPORTANCE_DEFAULT);
         mManager.createNotificationChannel(defaultChannel);
 
