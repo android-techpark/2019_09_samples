@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyButton">
+        <item name="android:textColor">@android:color/holo_green_dark</item>
+        <item name="android:background">@drawable/composite_btn</item>
+        <item name="android:text">Click me</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
 </resources>

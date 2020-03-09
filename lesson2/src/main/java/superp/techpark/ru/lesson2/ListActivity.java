@@ -1,17 +1,16 @@
 package superp.techpark.ru.lesson2;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -21,105 +20,108 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ListActivity extends AppCompatActivity {
 
-    private MyDataAdapter mAdapter;
-
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        RecyclerView list = findViewById(R.id.list);
 
-        RecyclerView recyclerView = findViewById(R.id.list);
+        list.setLayoutManager(
+                new LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        );
+        MyAdapter adapter = new MyAdapter();
+        list.setAdapter(adapter);
 
-        mAdapter = new MyDataAdapter(DataSource.getInstance().getData());
-        int horizontal = getResources().getBoolean(R.bool.is_horizontal) ?
-                LinearLayoutManager.HORIZONTAL : LinearLayout.VERTICAL;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, horizontal, false));
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.getRecycledViewPool().setMaxRecycledViews(mAdapter.TYPE_FIRST, 10);
-        recyclerView.getRecycledViewPool().setMaxRecycledViews(mAdapter.TYPE_SECOND, 10);
+
+        new Handler().postDelayed(() -> adapter.updateWith(DataSource.getInstance().getData()), 2000);
     }
 
-    class MyDataAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-        final int TYPE_FIRST = 0;
-        final int TYPE_SECOND = 1;
-        List<DataSource.MyData> mData;
+    private class MyAdapter extends RecyclerView.Adapter<MyHolder> {
 
-        public MyDataAdapter(List<DataSource.MyData> data) {
-            mData = data;
+        private final List<DataSource.MyData> datas = new ArrayList<>();
+
+        public void updateWith(List<DataSource.MyData> newData) {
+            datas.clear();
+            datas.addAll(newData);
+            notifyDataSetChanged();
         }
 
         @NonNull
         @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            Log.d("ListActivity", "onCreateViewHolder " + viewType);
-            switch (viewType) {
-                case TYPE_FIRST:
-                    View view1 = LayoutInflater
-                            .from(parent.getContext())
-                            .inflate(R.layout.list_item, parent, false);
-                    return new MyViewHolder(view1);
-                case TYPE_SECOND:
-                    View view2 = LayoutInflater
-                            .from(parent.getContext())
-                            .inflate(R.layout.list_item_2, parent, false);
-                    return new MyViewHolder2(view2);
-                default:
-                    throw new IllegalStateException();
+        public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            int layoutToInflate = viewType == 0 ?
+                    R.layout.list_item :
+                    R.layout.list_item_2;
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(layoutToInflate, parent, false);
+            if (viewType == 0) {
+                return new MyHolder(view);
+            } else {
+                return new MyHolderV2(view);
             }
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            DataSource.MyData data = mData.get(position);
+        public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+            DataSource.MyData data = datas.get(position);
+            holder.mImage.setBackgroundColor(data.mColor);
             holder.mTitle.setText(data.mTitle);
             holder.mDate.setText(data.mDate);
-
-            Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-            bitmap.eraseColor(data.mColor);
-            holder.mImageView.setImageBitmap(bitmap);
-
-            Log.d("ListActivity", "onBindViewHolder " + position);
+            holder.bindClickListener(position);
         }
 
         @Override
         public int getItemCount() {
-            return mData.size();
+            return datas.size();
         }
 
         @Override
         public int getItemViewType(int position) {
-            return (position % 2 == 0) ? TYPE_FIRST : TYPE_SECOND;
+            return position % 2;
         }
     }
 
+    class MyHolder extends RecyclerView.ViewHolder {
+        private ImageView mImage;
+        private TextView mTitle;
+        private TextView mDate;
 
-    class MyViewHolder2 extends MyViewHolder {
-        public MyViewHolder2(@NonNull View itemView) {
+        public MyHolder(@NonNull View itemView) {
             super(itemView);
-        }
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder {
-
-        private final ImageView mImageView;
-        private final TextView mTitle;
-        private final TextView mDate;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            mImageView = itemView.findViewById(R.id.image);
-            mTitle = itemView.findViewById(R.id.title);
             mDate = itemView.findViewById(R.id.date);
-            mImageView.setOnClickListener(view -> {
-                int pos = getAdapterPosition();
-                DataSource.MyData myData = mAdapter.mData.get(pos);
-                Toast.makeText(getApplicationContext(),
-                        myData.mTitle,
-                        Toast.LENGTH_LONG)
-                        .show();
-            });
+            mImage = itemView.findViewById(R.id.image);
+            mTitle = itemView.findViewById(R.id.title);
+        }
+
+        void bindClickListener(int position) {
+            itemView.findViewById(R.id.save_btn).setOnClickListener(v ->
+                    Toast.makeText(getApplicationContext(), "Clicked on item with pos " + position, Toast.LENGTH_SHORT).show()
+            );
+        }
+    }
+
+    class MyHolderV2 extends MyHolder {
+        private ImageView mPlayIcon;
+
+        public MyHolderV2(@NonNull View itemView) {
+            super(itemView);
+            mPlayIcon = itemView.findViewById(R.id.play_icon);
+        }
+
+        @Override
+        void bindClickListener(int position) {
+            itemView.findViewById(R.id.save_btn).setOnClickListener(v -> {
+                        Toast.makeText(getApplicationContext(), "Clicked on item with pos " + position, Toast.LENGTH_SHORT).show();
+                        if (mPlayIcon.getVisibility() == View.VISIBLE) {
+                            mPlayIcon.setVisibility(View.GONE);
+                        } else {
+                            mPlayIcon.setVisibility(View.VISIBLE);
+                        }
+                    }
+            );
         }
     }
 }

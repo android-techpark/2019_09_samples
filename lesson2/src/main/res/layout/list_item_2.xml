@@ -2,34 +2,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:layout_height="wrap_content">
+    android:layout_marginBottom="5dp">
 
     <ImageView
         android:id="@+id/image"
-        tools:src="@tools:sample/backgrounds/scenic"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:scaleType="fitXY"
-        android:layout_width="match_parent"
-        android:layout_height="25dp" />
+        tools:src="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@id/image"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/image"
         android:padding="@dimen/padding_size"
-        tools:text="@string/text"
-        android:layout_below="@+id/image"
-        />
+        tools:text="@string/text" />
 
     <TextView
         android:id="@+id/date"
-        android:padding="@dimen/padding_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/image"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/image"
-        tools:text="Date"
-        />
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/image"
+        android:padding="@dimen/padding_size"
+        tools:text="Date" />
+
+    <ImageView
+        android:id="@+id/play_icon"
+        android:src="@drawable/ic_video"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <TextView
+        android:id="@+id/save_btn"
+        style="@style/MyButton"
+        android:layout_below="@id/image"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>

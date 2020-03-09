@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:top="16dp"
+            android:left="48dp"
+            android:right="48dp"
+            android:bottom="16dp"
+            android:drawable="@drawable/rounded_filled" />
+
+    <item
+            android:left="192dp"
+            android:drawable="@color/save_color" />
+</layer-list>
