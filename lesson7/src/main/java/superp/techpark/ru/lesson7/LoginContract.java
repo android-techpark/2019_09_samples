@@ -1,19 +1,16 @@
 package superp.techpark.ru.lesson7;
 
-public interface LoginPresenter {
+public interface LoginContract {
 
-    void onSingInClicked(String login, String pass);
-
-    void onViewDestroyed();
+    interface Presenter {
+        void onSingInClicked(String login, String pass);
+        void onViewDestroyed();
+    }
 
     interface View {
-
         void showProgress();
-
         void hideProgress();
-
         void showError(String login);
-
         void showNextScreen();
     }
 }

@@ -1,12 +1,8 @@
 package superp.techpark.ru.lesson7;
 
-import android.content.Context;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import superp.techpark.ru.lesson7.dao.Credential;
-import superp.techpark.ru.lesson7.dao.CredentialsDB;
 import superp.techpark.ru.lesson7.executors.AppExecutors;
 
 
@@ -17,16 +13,6 @@ public class LocalCredentialsRepository implements CredentialsRepository {
         put("pupkin", "qa");
         put("local", "qa");
     }};
-
-    private final CredentialsDB mDb;
-
-    public LocalCredentialsRepository(Context context) {
-        mDb = DBHelper.getInstance(context).getCredentialsDb();
-        for (Map.Entry<String, String> entry : mPredefinedCredentials.entrySet()) {
-            mDb.getCredentialDao().insertCredential(new Credential(entry.getKey(), entry.getValue()));
-        }
-        mPredefinedCredentials.clear();
-    }
 
     @Override
     public void validateCredentials(final String login, final String pass,
@@ -40,12 +26,12 @@ public class LocalCredentialsRepository implements CredentialsRepository {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Credential foundCredential = mDb.getCredentialDao().get(login);
 
-                if (foundCredential == null) {
+                if (!mPredefinedCredentials.containsKey(login)) {
                     validationCallback.onNotFound();
                 } else {
-                    if (foundCredential.pass.equals(pass)) {
+                    String localPass = mPredefinedCredentials.get(login);
+                    if (localPass != null && localPass.equals(pass)) {
                         AppExecutors.getInstance().mainThread().execute(new Runnable() {
                             @Override
                             public void run() {

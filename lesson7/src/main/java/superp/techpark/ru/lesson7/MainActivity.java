@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import superp.techpark.ru.lesson7.presentation.LoginPresenterImpl;
 
 public class MainActivity extends AppCompatActivity
-        implements LoginPresenter.View {
+        implements LoginContract.View {
 
-    private LoginPresenter mLoginPresenter;
+    private LoginContract.Presenter mLoginPresenter;
     private EditText mLoginFiled;
     private EditText mPassField;
     private ProgressBar mProgressBar;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         mLoginPresenter = new LoginPresenterImpl(this,
                 new CompositeRepository(
                         new NetworkCredentialsRepository(),
-                        new LocalCredentialsRepository(getApplicationContext())
+                        new LocalCredentialsRepository()
                 )
         );
 

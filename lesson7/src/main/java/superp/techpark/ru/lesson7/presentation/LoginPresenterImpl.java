@@ -3,16 +3,16 @@ package superp.techpark.ru.lesson7.presentation;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import superp.techpark.ru.lesson7.CredentialsRepository;
-import superp.techpark.ru.lesson7.LoginPresenter;
+import superp.techpark.ru.lesson7.LoginContract;
 
-public class LoginPresenterImpl implements LoginPresenter {
+public class LoginPresenterImpl implements LoginContract.Presenter {
 
     @Nullable
-    private LoginPresenter.View mView;
+    private LoginContract.View mView;
     private CredentialsRepository mRepository;
     private String mLogin;
 
-    public LoginPresenterImpl(@Nullable View view,
+    public LoginPresenterImpl(@Nullable LoginContract.View view,
                               @NonNull CredentialsRepository repository) {
         mView = view;
         mRepository = repository;
