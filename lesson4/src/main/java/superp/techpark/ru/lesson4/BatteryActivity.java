@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import androidx.appcompat.app.AppCompatActivity;
+import superp.techpark.ru.lesson4.app.DummyApplication;
+
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ public class BatteryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_service);
         mTextView = findViewById(R.id.text);
 
@@ -28,8 +31,8 @@ public class BatteryActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(mReceiver);
         super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 
     class BatteryReceiver extends BroadcastReceiver {
