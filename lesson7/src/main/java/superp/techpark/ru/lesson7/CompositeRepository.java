@@ -1,6 +1,6 @@
 package superp.techpark.ru.lesson7;
 
-public class CompositeRepository implements CredentialsRepository{
+public class CompositeRepository implements CredentialsRepository {
 
     CredentialsRepository mNetworkRepo;
     CredentialsRepository mLocalRepo;
@@ -9,7 +9,6 @@ public class CompositeRepository implements CredentialsRepository{
         mNetworkRepo = networkRepo;
         mLocalRepo = localRepo;
     }
-
 
     @Override
     public void validateCredentials(final String login, final String pass, final ValidationCallback validationCallback) {

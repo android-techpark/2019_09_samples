@@ -1,8 +1,10 @@
 package superp.techpark.ru.lesson7;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -23,11 +25,19 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         View singIN = findViewById(R.id.signin);
+        SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        defaultSharedPreferences
+                .edit()
+                .putBoolean("key", true)
+                .apply();
+
+        defaultSharedPreferences.getBoolean("key", false);
 
         mLoginPresenter = new LoginPresenterImpl(this,
                 new CompositeRepository(
                         new NetworkCredentialsRepository(),
-                        new LocalCredentialsRepository()
+                        new LocalCredentialsRepository(this)
                 )
         );
 
