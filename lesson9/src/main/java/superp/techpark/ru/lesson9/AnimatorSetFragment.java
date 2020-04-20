@@ -49,8 +49,10 @@ public class AnimatorSetFragment extends Fragment {
         final int targetY = 2 * root.getHeight() / 3;
         final AnimatorSet together = new AnimatorSet();
         final long duration = 2000L;
-        together.playTogether(ObjectAnimator.ofFloat(ball1, View.TRANSLATION_Y, 0, targetY).setDuration(duration),
-                ObjectAnimator.ofFloat(ball3, View.TRANSLATION_Y, 0, targetY).setDuration(duration));
+        together.playTogether(
+                ObjectAnimator.ofFloat(ball1, View.TRANSLATION_Y, 0, targetY).setDuration(duration),
+                ObjectAnimator.ofFloat(ball3, View.TRANSLATION_Y, 0, targetY).setDuration(duration)
+        );
         final AnimatorSet all = new AnimatorSet();
         all.playSequentially(together, ObjectAnimator.ofFloat(ball2, View.TRANSLATION_Y, 0, targetY).setDuration(duration));
         all.start();
@@ -63,7 +65,9 @@ public class AnimatorSetFragment extends Fragment {
         final int targetY = 2 * root.getHeight() / 3;
         final long duration = 2000L;
         final AnimatorSet set = new AnimatorSet();
-        set.play(ObjectAnimator.ofFloat(ball1, View.TRANSLATION_Y, 0, targetY).setDuration(duration))
+        set.play(
+                ObjectAnimator.ofFloat(ball1, View.TRANSLATION_Y, 0, targetY)
+                        .setDuration(duration))
                 .with(ObjectAnimator.ofFloat(ball3, View.TRANSLATION_Y, 0, targetY).setDuration(duration))
                 .after(ObjectAnimator.ofFloat(ball2, View.TRANSLATION_Y, 0, targetY).setDuration(duration));
         set.start();

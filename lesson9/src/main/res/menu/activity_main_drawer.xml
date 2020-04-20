@@ -27,6 +27,11 @@
             android:icon="@drawable/ic_play_circle_outline_black_24dp"
             android:title="@string/menu_diy"/>
 
+        <item
+            android:id="@+id/coordinator"
+            android:icon="@drawable/ic_play_circle_outline_black_24dp"
+            android:title="Coordinator Sample"/>
+
 
     </group>
 </menu>

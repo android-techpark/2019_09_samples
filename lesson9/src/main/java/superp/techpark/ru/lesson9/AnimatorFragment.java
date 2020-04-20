@@ -87,7 +87,7 @@ public class AnimatorFragment extends Fragment {
     void onTextColorClick() {
         reset();
 
-        animator = ValueAnimator.ofInt(0xFFFF0000, 0xFF00FF00, 0xFF0000FF);
+        animator = ValueAnimator.ofArgb(0xFFFF0000, 0xFF00FF00, 0xFF0000FF);
         animator.setDuration(6000L);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
