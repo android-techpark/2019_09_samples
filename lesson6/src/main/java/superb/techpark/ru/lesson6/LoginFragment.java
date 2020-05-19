@@ -1,6 +1,7 @@
 package superb.techpark.ru.lesson6;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +15,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
+
+import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class LoginFragment extends Fragment {
 
-    private LoginViewModel mLoginViewModel;
+    @Inject
+    public LoginViewModel mLoginViewModel;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ApplicationModified.getComponent(context).inject(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +43,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mLoginViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
 
         final Button loginBtn = view.findViewById(R.id.login_btn);
 

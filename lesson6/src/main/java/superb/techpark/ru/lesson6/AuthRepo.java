@@ -1,8 +1,5 @@
 package superb.techpark.ru.lesson6;
 
-import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -10,6 +7,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,13 +20,10 @@ import superb.techpark.ru.lesson6.network.UserApi;
 public class AuthRepo {
 
     private final ApiRepo mApiRepo;
+
+    @Inject
     public AuthRepo(ApiRepo apiRepo) {
         mApiRepo = apiRepo;
-    }
-
-    @NonNull
-    public static AuthRepo getInstance(Context context) {
-        return ApplicationModified.from(context).getAuthRepo();
     }
 
     private String mCurrentUser;

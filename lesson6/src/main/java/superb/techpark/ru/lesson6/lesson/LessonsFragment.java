@@ -1,6 +1,6 @@
 package superb.techpark.ru.lesson6.lesson;
 
-
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,17 +23,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
+import superb.techpark.ru.lesson6.ApplicationModified;
 import superb.techpark.ru.lesson6.R;
 
 
 public class LessonsFragment extends Fragment {
 
-    private LessonsViewModel mLessonsViewModel;
+    @Inject
+    public LessonsViewModel mLessonsViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_lessons, container, false);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ApplicationModified.getComponent(context).inject(this);
     }
 
     @Override
@@ -75,8 +84,6 @@ public class LessonsFragment extends Fragment {
                 }
             }
         };
-        mLessonsViewModel = new ViewModelProvider(getActivity())
-                .get(LessonsViewModel.class);
         mLessonsViewModel
                 .getLessons()
                 .observe(getViewLifecycleOwner(), observer);

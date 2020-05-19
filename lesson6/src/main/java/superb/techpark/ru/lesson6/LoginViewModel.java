@@ -1,30 +1,34 @@
 package superb.techpark.ru.lesson6;
 
 import android.app.Application;
-import android.os.Handler;
-import android.os.Looper;
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import java.util.Objects;
+
+import javax.inject.Inject;
+
+import superb.techpark.ru.lesson6.di.ForApplication;
 
 @SuppressWarnings("WeakerAccess")
 public class LoginViewModel extends AndroidViewModel {
 
     private LoginData mLastLoginData = new LoginData("", "");
+    private final AuthRepo mAuthRepo;
 
-    private MediatorLiveData<LoginState> mLoginState = new MediatorLiveData<>();
+    private final MediatorLiveData<LoginState> mLoginState = new MediatorLiveData<>();
 
-    public LoginViewModel(@NonNull Application application) {
-        super(application);
+    @Inject
+    public LoginViewModel(@NonNull @ForApplication Context context, AuthRepo authRepo) {
+        super((Application) context);
+        mAuthRepo = authRepo;
         mLoginState.setValue(LoginState.NONE);
     }
 
@@ -48,7 +52,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     private void requestLogin(final LoginData loginData) {
         mLoginState.postValue(LoginState.IN_PROGRESS);
-        final LiveData<AuthRepo.AuthProgress> progressLiveData = AuthRepo.getInstance(getApplication())
+        final LiveData<AuthRepo.AuthProgress> progressLiveData = mAuthRepo
                 .login(loginData.getLogin(), loginData.getPassword());
         mLoginState.addSource(progressLiveData, new Observer<AuthRepo.AuthProgress>() {
             @Override

@@ -1,18 +1,20 @@
 package superb.techpark.ru.lesson6.network;
 
-import android.content.Context;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
-import superb.techpark.ru.lesson6.ApplicationModified;
 
+@Singleton
 public class ApiRepo {
     private final UserApi mUserApi;
     private final LessonApi mLessonApi;
     private final OkHttpClient mOkHttpClient;
 
+    @Inject
     public ApiRepo() {
         mOkHttpClient = new OkHttpClient()
                 .newBuilder()
@@ -36,10 +38,6 @@ public class ApiRepo {
 
     public LessonApi getLessonApi() {
         return mLessonApi;
-    }
-
-    public static ApiRepo from(Context context) {
-        return ApplicationModified.from(context).getApis();
     }
 }
 
